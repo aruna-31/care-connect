@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* Updated Theme: Light Pink & Beige Blue */
+
+    /* Primary: Beige Blue (Soft Teal/Blue) */
+    --color-primary: #8cb0c0;
+    /* A soft, calming blue-grey */
+    --color-primary-hover: #7ea3b5;
+
+    /* Accent: Light Pink */
+    --color-accent: #f7d6e0;
+    /* Soft pink */
+
+    /* Backgrounds */
+    --color-background: #fdfbf7;
+    /* Warm beige-white/cream */
+    --color-surface: #ffffff;
+
+    /* Text */
+    --color-text-main: #4a4a4a;
+    /* Softer charcoal */
+    --color-text-muted: #7d7d7d;
+
+    /* Spacing & Radius (preserved) */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --radius-md: 0.75rem;
+    /* Softer, rounder corners */
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-delay-100 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-300 {
+    animation-delay: 0.3s;
+}
