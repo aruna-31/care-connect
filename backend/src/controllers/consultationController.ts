@@ -13,6 +13,10 @@ const endConsultationSchema = z.object({
     prescription: z.string().optional()
 });
 
+const savePrescriptionSchema = z.object({
+    prescription: z.string()
+});
+
 const startConsultationSchema = z.object({
     appointmentId: z.string().uuid()
 });
@@ -151,6 +155,33 @@ export const getHistory = async (req: AuthRequest, res: Response) => {
 
         const { rows } = await query(sql, [userId]);
         res.json({ data: rows });
+
+    } catch (error) {
+        handleControllerError(error, res);
+    }
+};
+
+export const savePrescription = async (req: AuthRequest, res: Response) => {
+    try {
+        const { appointmentId } = req.params;
+        const { prescription } = savePrescriptionSchema.parse(req.body);
+
+        const result = await query(
+            `UPDATE consultations 
+             SET prescription = $1
+             WHERE appointment_id = $2
+             RETURNING *`,
+            [prescription, appointmentId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Consultation record not found' });
+        }
+
+        res.json({
+            status: 'success',
+            data: result.rows[0]
+        });
 
     } catch (error) {
         handleControllerError(error, res);
